@@ -11,6 +11,7 @@
 		645E9356258173CC0025B125 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645E9355258173CC0025B125 /* ContentView.swift */; };
 		645E9358258173CC0025B125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 645E9357258173CC0025B125 /* Assets.xcassets */; };
 		645E935B258173CC0025B125 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 645E935A258173CC0025B125 /* Preview Assets.xcassets */; };
+		645E936725818C780025B125 /* CalculatorButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645E936625818C780025B125 /* CalculatorButtonsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		645E9357258173CC0025B125 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		645E935A258173CC0025B125 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		645E935C258173CC0025B125 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		645E936625818C780025B125 /* CalculatorButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButtonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		645E9352258173CC0025B125 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				645E936525818C4B0025B125 /* Views */,
 				645E9353258173CC0025B125 /* CalculatorApp.swift */,
 				645E9355258173CC0025B125 /* ContentView.swift */,
 				645E9357258173CC0025B125 /* Assets.xcassets */,
@@ -67,6 +70,14 @@
 				645E935A258173CC0025B125 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		645E936525818C4B0025B125 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				645E936625818C780025B125 /* CalculatorButtonsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				645E936725818C780025B125 /* CalculatorButtonsView.swift in Sources */,
 				645E9356258173CC0025B125 /* ContentView.swift in Sources */,
 				645E9354258173CC0025B125 /* CalculatorApp.swift in Sources */,
 			);
