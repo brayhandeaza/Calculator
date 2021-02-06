@@ -135,7 +135,7 @@ struct ContentView: View {
         
     }
     
-    //handle buttons' width
+    //Handle buttons' width
     func buttonsWidth(button: CalculatorButtons) -> CGFloat {
         if button == .zero {
             return (UIScreen.main.bounds.width - 4 * 12) / 4 * 2
