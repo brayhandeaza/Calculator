@@ -93,7 +93,6 @@
 				796147FACDDA27B007F59E91 /* Pods-Calculator.debug.xcconfig */,
 				54A1B70EBBD60FBC0D6644C9 /* Pods-Calculator.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

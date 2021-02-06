@@ -42,9 +42,15 @@ enum CalculatorButtons: String {
         case .multiply:
             return "X"
         case .minus:
-            return "-"
+            return "–"
+        case .divide:
+            return "÷"
         case .dot:
             return "."
+        case .plusMinus:
+            return "+/-"
+        case .percent:
+            return "%"
         default:
             return "AC"
         }
@@ -64,15 +70,29 @@ enum CalculatorButtons: String {
 
 class GlobalEnvironment: ObservableObject {
     @Published var display = "0"
-    
-    func receiveInput(button: CalculatorButtons) {
-        self.display = button.title
+    @Published var left = "10"
+    @Published var right = "10"
+    @Published var result: Int = 0
+    @Published var operation = ""
+        
+    func operation(_operation: String)  {
+        let intLeft: Int = Int(String(self.left))!
+        let intRight: Int = Int(String(self.right))!
+        
+        if _operation == "+" {
+            self.result = intLeft + intRight
+            self.display = String(result)
+        }
     }
-    
 }
 
 struct ContentView: View {
     @EnvironmentObject var env: GlobalEnvironment
+    @State var display = "0"
+    @State var left = "10"
+    @State var right = "10"
+    @State var result: Int = 0
+    @State var operation = ""
     
     let buttons: [[CalculatorButtons]] = [
         [.ac, .plusMinus, .percent, .divide],
@@ -82,15 +102,13 @@ struct ContentView: View {
         [.zero, .dot, .equals]
     ]
     
-    
-    
     var body: some View {
         ZStack(alignment: .bottom) {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack(spacing: 12) {
                 HStack {
                     Spacer()
-                    Text(env.display)
+                    Text(self.display)
                         .font(.system(size: 64))
                         .foregroundColor(Color.white)
                 }
@@ -99,7 +117,14 @@ struct ContentView: View {
                 ForEach(buttons, id: \.self) { row in
                     HStack(spacing: 12) {
                         ForEach(row, id: \.self) { button in
-                            CalculatorButtonsView(button: button)
+                            Button(action: {receiveInput(button: button )}) {
+                                Text(button.title)
+                                    .font(.system(size: 32))
+                                    .frame(width: self.buttonsWidth(button: button), height: (UIScreen.main.bounds.width - 5 * 12) / 4)
+                                    .foregroundColor(Color.white)
+                                    .background(button.backgoundColor)
+                                    .cornerRadius(self.buttonsWidth(button: button))
+                            }
                         }
                     }
                 }
@@ -108,6 +133,82 @@ struct ContentView: View {
             .padding(.bottom)
         }
         
+    }
+    
+    //handle buttons' width
+    func buttonsWidth(button: CalculatorButtons) -> CGFloat {
+        if button == .zero {
+            return (UIScreen.main.bounds.width - 4 * 12) / 4 * 2
+        } else {
+            return (UIScreen.main.bounds.width - 5 * 12) / 4
+        }
+    }
+    
+    //Handle input pressed
+    func receiveInput(button: CalculatorButtons) {
+        if button.title == "AC" {
+            
+            // Reset values
+            self.left = ""
+            self.right = ""
+            self.display = "0"
+        
+        }
+        else if button.title == "." && self.display == "0" {
+            self.display = "0."
+            
+        }
+        else if button.title == "." && self.display.contains(".") {
+           
+        }
+        else if button.title == "0" && self.display == "0" {
+            self.display = "0"
+        }
+        else if self.display == "0" {
+            self.display = ""
+            self.display += button.title
+        }
+        else if button.title == "+" && self.right != "" {
+            self.left = self.display
+            self.operation = "+"
+//            self.display = "0"
+        }
+        else if button.title == "=" && self.right != "" && self.left != "" {
+            if left.isEmpty { self.display = "" }
+            self.right = self.display
+            self.operation(_operation: "+")
+            
+            // Reset values
+            self.left = ""
+            self.right = ""
+        }
+        else {
+            if !left.isEmpty { self.display = "" }
+            self.display += button.title
+        }
+    }
+    
+    // Handle math operations
+    func operation(_operation: String)  {
+        let intLeft: Int = Int(String(self.left))!
+        let intRight: Int = Int(String(self.right))!
+        
+        if _operation == "+" {
+            self.result = intLeft + intRight
+            self.display = String(result)
+        }
+        else if _operation == "-" {
+            self.result = intLeft - intRight
+            self.display = String(result)
+        }
+        else if _operation == "X" {
+            self.result = intLeft * intRight
+            self.display = String(result)
+        }
+        else if _operation == "÷" {
+            self.result = intLeft / intRight
+            self.display = String(result)
+        }
     }
 }
 
